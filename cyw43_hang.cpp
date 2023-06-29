@@ -27,6 +27,11 @@ void isr(void)
     {gpio_acknowledge_irq(lpin, isr_events);
         countl++;
     }
+
+}
+
+void isr2(void)
+{
     if(gpio_get_irq_event_mask(rpin) & isr_events)
     {gpio_acknowledge_irq(rpin, isr_events);
         countr++;
@@ -41,7 +46,7 @@ void init_isr(void)
     gpio_add_raw_irq_handler(lpin, &isr);
 	gpio_set_input_enabled(rpin, true);
     gpio_set_irq_enabled(rpin, isr_events, true);
-    gpio_add_raw_irq_handler(rpin, &isr);
+    gpio_add_raw_irq_handler(rpin, &isr2);
     irq_set_enabled(IO_IRQ_BANK0, true);
 }
 
