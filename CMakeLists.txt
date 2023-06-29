@@ -19,8 +19,9 @@ macro(make_exec exec_name exec_dir)
     target_compile_definitions(${exec_name} PUBLIC
                             WIFI_SSID=\"${WIFI_SSID}\"
                             WIFI_PASSWORD=\"${WIFI_PASSWORD}\"
-                            # PICO_CYW43_ARCH_BACKGROUND
-                            PICO_CYW43_ARCH_NONE
+                            PICO_CYW43_ARCH_BACKGROUND
+                            # PICO_CYW43_ARCH_NONE
+                            # PICO_CYW43_ARCH_POLL
                             CYW43_HOST_NAME=\"${CYW43_HOST_NAME}\"
     )
 
@@ -31,8 +32,9 @@ macro(make_exec exec_name exec_dir)
     )
 
     target_link_libraries(${exec_name}
-                            # pico_cyw43_arch_lwip_threadsafe_background
-                            pico_cyw43_arch_none
+                            pico_cyw43_arch_lwip_threadsafe_background
+                            # pico_cyw43_arch_none
+                            # pico_cyw43_arch_lwip_poll
                             pico_stdlib
                             hardware_adc
                             hardware_pwm
