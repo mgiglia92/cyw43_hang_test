@@ -20,7 +20,7 @@ macro(make_exec exec_name exec_dir)
                             WIFI_SSID=\"${WIFI_SSID}\"
                             WIFI_PASSWORD=\"${WIFI_PASSWORD}\"
                             # PICO_CYW43_ARCH_BACKGROUND
-                            PICO_CYW43_ARCH_none
+                            PICO_CYW43_ARCH_NONE
                             CYW43_HOST_NAME=\"${CYW43_HOST_NAME}\"
     )
 
@@ -45,3 +45,4 @@ macro(make_exec exec_name exec_dir)
 endmacro()
 make_exec(cyw43_hang cyw43_hang.cpp)
 make_exec(cyw43_no_hang cyw43_no_hang.cpp)
+make_exec(cyw43_hang2 cyw43_hang2.cpp)
