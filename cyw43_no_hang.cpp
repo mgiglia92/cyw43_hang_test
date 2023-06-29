@@ -34,12 +34,15 @@ void isr(void)
 
 void init_isr(void)
 {
+	gpio_set_input_enabled(lpin, true);
     gpio_set_irq_enabled(lpin, isr_events, true);
     gpio_add_raw_irq_handler(lpin, &isr);
+	gpio_set_input_enabled(rpin, true);
     gpio_set_irq_enabled(rpin, isr_events, true);
     gpio_add_raw_irq_handler(rpin, &isr);
     irq_set_enabled(IO_IRQ_BANK0, true);
 }
+
 
 int main()
 {

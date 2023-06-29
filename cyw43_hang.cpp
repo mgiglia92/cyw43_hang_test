@@ -22,6 +22,7 @@ const uint32_t isr_events
 
 void isr(void)
 {
+    cout << "isr activated" << '\n';
     if(gpio_get_irq_event_mask(lpin) & isr_events)
     {gpio_acknowledge_irq(lpin, isr_events);
         countl++;
@@ -34,8 +35,10 @@ void isr(void)
 
 void init_isr(void)
 {
+	gpio_set_input_enabled(lpin, true);
     gpio_set_irq_enabled(lpin, isr_events, true);
     gpio_add_raw_irq_handler(lpin, &isr);
+	gpio_set_input_enabled(rpin, true);
     gpio_set_irq_enabled(rpin, isr_events, true);
     gpio_add_raw_irq_handler(rpin, &isr);
     irq_set_enabled(IO_IRQ_BANK0, true);
@@ -44,7 +47,11 @@ void init_isr(void)
 int main()
 {
     stdio_init_all();    
+    init_isr();
+
     sleep_ms(1500);
+
+
     
     if(cyw43_arch_init())
     {
@@ -54,8 +61,6 @@ int main()
     
     cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
     
-    init_isr();
-
     while(true)
     {   
         sleep_ms(100);
